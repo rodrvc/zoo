@@ -99,9 +99,11 @@ public class Flogin extends javax.swing.JFrame {
                 System.out.println("No se encuentra usuario");
             }else{
                 System.out.println("Bienvenido " + nombre);
+                jFAdministrador jadm = new jFAdministrador();
+                jadm.setVisible(true);
+                this.dispose();
             }
-        
-        System.out.println("Se evalua el codigo");
+           
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
