@@ -7,12 +7,15 @@ package Controller;
 
 import Model.ConsultasCuidador;
 import Model.Cuidador;
+import java.util.ArrayList;
 
 /**
  *
  * @author silve
  */
 public class ControllerCuidador {
+     
+      
       public static String iniciarSesionCuidador(String user, String pass){
         ConsultasCuidador conA = new ConsultasCuidador(); 
         
@@ -25,6 +28,27 @@ public class ControllerCuidador {
         }else{
             return null; 
         }
-    } 
+    }
+      
+      public static void cargarLista(){
+          
+      }
+      
+      
+      public static ArrayList devolverCuidadores(){ // conseguirArray
+          ConsultasCuidador conA = new ConsultasCuidador(); 
+          
+          return conA.cargarTablaCuidadoresDesdeSql();
+      }
+      
+      public static void AgregarCuidadores(String run , String nombre , String Apellido , String correo , String password){
+          ConsultasCuidador conA = new ConsultasCuidador();
+         
+          Cuidador c = new Cuidador(run , nombre , Apellido , correo , password);
+           
+          conA.AgregarCuidador(c);
+          conA.cargarTablaCuidadoresDesdeSql();
+          
+      }
     
 }

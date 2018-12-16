@@ -27,14 +27,27 @@ public class jFAdministrador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jMenuAgregar = new javax.swing.JMenu();
+        jmenuAgregarCuidador = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("Agregar");
-        jMenuBar1.add(jMenu1);
+        jMenuAgregar.setText("Agregar");
+
+        jmenuAgregarCuidador.setText("Agregar Cuidador");
+        jmenuAgregarCuidador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmenuAgregarCuidadorActionPerformed(evt);
+            }
+        });
+        jMenuAgregar.add(jmenuAgregarCuidador);
+
+        jMenuBar1.add(jMenuAgregar);
 
         jMenu2.setText("Alimento");
         jMenuBar1.add(jMenu2);
@@ -49,11 +62,19 @@ public class jFAdministrador extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 48, Short.MAX_VALUE)
+            .addGap(0, 50, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jmenuAgregarCuidadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuAgregarCuidadorActionPerformed
+        // TODO add your handling code here:
+        jpanelAgregar agregar = new jpanelAgregar();
+        agregar.setVisible(true);
+        this.setContentPane(agregar);
+        this.pack();
+    }//GEN-LAST:event_jmenuAgregarCuidadorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -91,8 +112,10 @@ public class jFAdministrador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenuAgregar;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jmenuAgregarCuidador;
     // End of variables declaration//GEN-END:variables
 }

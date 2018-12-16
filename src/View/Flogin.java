@@ -20,7 +20,9 @@ public class Flogin extends javax.swing.JFrame {
      * Creates new form Flogin
      */
     public Flogin() {
+        
         initComponents();
+        cargarCombo();
     }
     
     public void cargarCombo(){
@@ -28,8 +30,10 @@ public class Flogin extends javax.swing.JFrame {
         DefaultComboBoxModel comboInicio = (DefaultComboBoxModel) jcbRoles.getModel();
         comboInicio.removeAllElements();
         comboInicio.addElement("Seleccionar");
-        comboInicio.addElement("Cuidador");
+       
         comboInicio.addElement("Administrador");
+        
+         comboInicio.addElement("Cuidador");
         
     }
 
@@ -53,6 +57,10 @@ public class Flogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(javax.swing.UIManager.getDefaults().getColor("Button.darcula.color1"));
+
+        textUsuario.setText("el@gmail.com");
+
+        textPassword.setText("123");
 
         btnIngresar.setText("Ingresar");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
@@ -147,13 +155,11 @@ public class Flogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         String user = textUsuario.getText();
         String pass = textPassword.getText();
-        String roles = jcbRoles.getSelectedItem().toString(); // se obtiene el valor del combobox
+        String roles = String.valueOf(jcbRoles.getSelectedItem()).toLowerCase();
         
         //condicional segun combo
         // si es administrativo
-        if (roles.equals("Seleccionar")) {
-            JOptionPane.showMessageDialog(null, "Debes seleccionar un Rol", "INICIO SESION", JOptionPane.CLOSED_OPTION);
-        }else if(roles.equals("Administrador")){
+       if(roles.equals("administrador")){
         String nombre = ControllerAdministrativo.iniciarSesionAdministrativo(user, pass);
         
  
@@ -167,10 +173,7 @@ public class Flogin extends javax.swing.JFrame {
                 this.dispose();
             }
             
-            
-        }else{
-         // si es cuidador    
-           
+        }else if(roles.equals("cuidador")){
             String nombre = ControllerCuidador.iniciarSesionCuidador(user, pass);
             
             if (nombre == null ) {
@@ -182,9 +185,8 @@ public class Flogin extends javax.swing.JFrame {
                 jadm.setVisible(true);
                 this.dispose();
             }
-            
-        
-        
+        }else {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un Rol", "INICIO SESION", JOptionPane.CLOSED_OPTION);
         }
            
     }//GEN-LAST:event_btnIngresarActionPerformed

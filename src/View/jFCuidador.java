@@ -5,6 +5,9 @@
  */
 package View;
 
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
+
 /**
  *
  * @author silve
@@ -16,6 +19,11 @@ public class jFCuidador extends javax.swing.JFrame {
      */
     public jFCuidador() {
         initComponents();
+    }
+    
+    private void cerrar(){
+        WindowEvent eventoCerrar = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(eventoCerrar);
     }
 
     /**
@@ -33,11 +41,11 @@ public class jFCuidador extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 492, Short.MAX_VALUE)
+            .addGap(0, 996, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 252, Short.MAX_VALUE)
+            .addGap(0, 543, Short.MAX_VALUE)
         );
 
         pack();
