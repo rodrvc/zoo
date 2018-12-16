@@ -6,6 +6,9 @@
 package View;
 
 import Controller.ControllerAdministrativo;
+import Controller.ControllerCuidador;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +21,16 @@ public class Flogin extends javax.swing.JFrame {
      */
     public Flogin() {
         initComponents();
+    }
+    
+    public void cargarCombo(){
+        jcbRoles.setModel( new DefaultComboBoxModel());
+        DefaultComboBoxModel comboInicio = (DefaultComboBoxModel) jcbRoles.getModel();
+        comboInicio.removeAllElements();
+        comboInicio.addElement("Seleccionar");
+        comboInicio.addElement("Cuidador");
+        comboInicio.addElement("Administrador");
+        
     }
 
     /**
@@ -33,8 +46,13 @@ public class Flogin extends javax.swing.JFrame {
         textPassword = new javax.swing.JTextField();
         btnIngresar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jcbRoles = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(javax.swing.UIManager.getDefaults().getColor("Button.darcula.color1"));
 
         btnIngresar.setText("Ingresar");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
@@ -50,39 +68,76 @@ public class Flogin extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Sylfaen", 2, 24)); // NOI18N
+        jLabel2.setText("ZOOLOGICO SOL-LOGICO");
+
+        jLabel4.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        jLabel4.setText("PASSWORD");
+
+        jLabel5.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        jLabel5.setText("NOMBRE:");
+
+        jcbRoles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR", "ADMINSITRADOR", "CUIDADOR" }));
+        jcbRoles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbRolesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(186, 186, 186)
-                        .addComponent(btnIngresar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(74, 74, 74)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textUsuario)
-                            .addComponent(textPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))))
-                .addGap(232, 232, 232))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(43, 43, 43)
+                                .addComponent(textUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(textPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(65, 65, 65)
+                        .addComponent(jcbRoles, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnIngresar)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(textUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(textPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel2)
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnIngresar)
-                        .addGap(76, 76, 76))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(64, 64, 64))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbRoles, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnIngresar))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(textPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4))
+                                .addGap(99, 99, 99))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(jButton2)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         pack();
@@ -92,17 +147,45 @@ public class Flogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         String user = textUsuario.getText();
         String pass = textPassword.getText();
+        String roles = jcbRoles.getSelectedItem().toString(); // se obtiene el valor del combobox
+        
+        //condicional segun combo
+        // si es administrativo
+        if (roles.equals("Seleccionar")) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un Rol", "INICIO SESION", JOptionPane.CLOSED_OPTION);
+        }else if(roles.equals("Administrador")){
         String nombre = ControllerAdministrativo.iniciarSesionAdministrativo(user, pass);
         
  
             if(nombre == null ){
-                System.out.println("No se encuentra usuario");
+                JOptionPane.showMessageDialog(null, "No existe", "INICIO SESION", JOptionPane.CLOSED_OPTION);
             }else{
-                System.out.println("Bienvenido " + nombre);
+                // los parametros son todos correctos
+                System.out.println("Bienvenido Sr." + nombre);
                 jFAdministrador jadm = new jFAdministrador();
                 jadm.setVisible(true);
                 this.dispose();
             }
+            
+            
+        }else{
+         // si es cuidador    
+           
+            String nombre = ControllerCuidador.iniciarSesionCuidador(user, pass);
+            
+            if (nombre == null ) {
+                JOptionPane.showMessageDialog(null, "No existe", "INICIO SESION", JOptionPane.CLOSED_OPTION);
+            }else {
+                //si los parametros son correctos
+                System.out.println("Bienvenido Sr." + nombre);
+                jFAdministrador jadm = new jFAdministrador();
+                jadm.setVisible(true);
+                this.dispose();
+            }
+            
+        
+        
+        }
            
     }//GEN-LAST:event_btnIngresarActionPerformed
 
@@ -110,6 +193,10 @@ public class Flogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jcbRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbRolesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbRolesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,6 +236,10 @@ public class Flogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JComboBox<String> jcbRoles;
     private javax.swing.JTextField textPassword;
     private javax.swing.JTextField textUsuario;
     // End of variables declaration//GEN-END:variables

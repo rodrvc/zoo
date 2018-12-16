@@ -6,7 +6,6 @@
 package Model;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,26 +14,25 @@ import java.sql.SQLException;
  *
  * @author silve
  */
-public class ConsultasAdministrador extends Conexion{
-    public boolean inicioSesion(Administrador adm){
+public class ConsultasCuidador extends Conexion {
+    public boolean inicioSesion(Cuidador c){
         PreparedStatement ps = null ; 
         ResultSet rs = null ;
         Connection con = getConexion();
       
-        String sql = "SELECT nombre FROM administrador Where correo = ? and password = ? " ;
+        String sql = "SELECT nombre FROM cuidador Where correo = ? and password = ? " ;
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, adm.getCorreo());
-            ps.setString(2, adm.getRutAdministrador());
+            ps.setString(1, c.getCorreo());
+            ps.setString(2, c.getPassword());
             
             rs = ps.executeQuery(); 
             
             if (rs.next()) {
-                adm.setNombre(rs.getString("nombre"));
+                c.setNombre(rs.getString("nombre"));
                 return true; 
             }
-            
             return  false ;
             
         } catch (SQLException e) {
@@ -48,4 +46,5 @@ public class ConsultasAdministrador extends Conexion{
             }
         } 
     }
+    
 }
