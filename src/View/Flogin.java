@@ -7,6 +7,7 @@ package View;
 
 import Controller.ControllerAdministrativo;
 import Controller.ControllerCuidador;
+import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -23,6 +24,11 @@ public class Flogin extends javax.swing.JFrame {
         
         initComponents();
         cargarCombo();
+        this.setLocation(50,50);
+        this.getContentPane().setBackground(Color.WHITE);
+        setLocationRelativeTo(null);
+        
+        
     }
     
     public void cargarCombo(){
@@ -59,6 +65,11 @@ public class Flogin extends javax.swing.JFrame {
         setBackground(javax.swing.UIManager.getDefaults().getColor("Button.darcula.color1"));
 
         textUsuario.setText("el@gmail.com");
+        textUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textUsuarioActionPerformed(evt);
+            }
+        });
 
         textPassword.setText("123");
 
@@ -134,11 +145,11 @@ public class Flogin extends javax.swing.JFrame {
                             .addComponent(btnIngresar))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(textPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4))
-                                .addGap(99, 99, 99))
+                                .addGap(112, 112, 112))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(32, 32, 32)
                                 .addComponent(jButton2)
@@ -199,6 +210,11 @@ public class Flogin extends javax.swing.JFrame {
     private void jcbRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbRolesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbRolesActionPerformed
+
+    private void textUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textUsuarioActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_textUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

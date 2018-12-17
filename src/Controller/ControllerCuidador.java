@@ -36,8 +36,7 @@ public class ControllerCuidador {
       
       
       public static ArrayList devolverCuidadores(){ // conseguirArray
-          ConsultasCuidador conA = new ConsultasCuidador(); 
-          
+          ConsultasCuidador conA = new ConsultasCuidador();  
           return conA.cargarTablaCuidadoresDesdeSql();
       }
       
@@ -48,7 +47,6 @@ public class ControllerCuidador {
            
           conA.AgregarCuidador(c);
           conA.cargarTablaCuidadoresDesdeSql();
-          
       }
     
 }

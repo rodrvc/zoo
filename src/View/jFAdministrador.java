@@ -16,6 +16,7 @@ public class jFAdministrador extends javax.swing.JFrame {
      */
     public jFAdministrador() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -30,14 +31,23 @@ public class jFAdministrador extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAgregar = new javax.swing.JMenu();
+        jMenuAgregarAlimento = new javax.swing.JMenuItem();
         jmenuAgregarCuidador = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        salir = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenuAgregar.setText("Agregar");
+
+        jMenuAgregarAlimento.setText("Alimento");
+        jMenuAgregarAlimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuAgregarAlimentoActionPerformed(evt);
+            }
+        });
+        jMenuAgregar.add(jMenuAgregarAlimento);
 
         jmenuAgregarCuidador.setText("Agregar Cuidador");
         jmenuAgregarCuidador.addActionListener(new java.awt.event.ActionListener() {
@@ -49,8 +59,8 @@ public class jFAdministrador extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuAgregar);
 
-        jMenu2.setText("Alimento");
-        jMenuBar1.add(jMenu2);
+        salir.setText("Alimento");
+        jMenuBar1.add(salir);
 
         setJMenuBar(jMenuBar1);
 
@@ -72,9 +82,20 @@ public class jFAdministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
         jpanelAgregar agregar = new jpanelAgregar();
         agregar.setVisible(true);
+        
         this.setContentPane(agregar);
         this.pack();
     }//GEN-LAST:event_jmenuAgregarCuidadorActionPerformed
+
+    private void jMenuAgregarAlimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAgregarAlimentoActionPerformed
+        // TODO add your handling code here:
+        jpanelAgregarComida panelAlimentosAdministrador = new jpanelAgregarComida(); 
+        panelAlimentosAdministrador.setVisible(true);
+        this.setContentPane(panelAlimentosAdministrador);
+        this.pack();
+        
+        
+    }//GEN-LAST:event_jMenuAgregarAlimentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,10 +133,11 @@ public class jFAdministrador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenuAgregar;
+    private javax.swing.JMenuItem jMenuAgregarAlimento;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jmenuAgregarCuidador;
+    private javax.swing.JMenu salir;
     // End of variables declaration//GEN-END:variables
 }
