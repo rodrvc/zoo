@@ -11,8 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- *
+/*
  * @author silve
  */
 public class ConsultasAdministrador extends Conexion{
@@ -34,7 +33,6 @@ public class ConsultasAdministrador extends Conexion{
                 adm.setNombre(rs.getString("nombre"));
                 return true; 
             }
-            
             return  false ;
             
         } catch (SQLException e) {

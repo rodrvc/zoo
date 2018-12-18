@@ -5,6 +5,9 @@
  */
 package View;
 
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
+
 /**
  *
  * @author silve
@@ -18,6 +21,12 @@ public class jFAdministrador extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
+    
+    
+       private void cerrar(){
+            WindowEvent eventoCerrar = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+            Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(eventoCerrar);
+ }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,13 +38,17 @@ public class jFAdministrador extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAgregar = new javax.swing.JMenu();
         jMenuAgregarAlimento = new javax.swing.JMenuItem();
         jmenuAgregarCuidador = new javax.swing.JMenuItem();
         salir = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
+
+        jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,7 +72,16 @@ public class jFAdministrador extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuAgregar);
 
-        salir.setText("Alimento");
+        salir.setText("salir");
+
+        jMenuItem3.setText("jMenuItem3");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        salir.add(jMenuItem3);
+
         jMenuBar1.add(salir);
 
         setJMenuBar(jMenuBar1);
@@ -96,6 +118,12 @@ public class jFAdministrador extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jMenuAgregarAlimentoActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        cerrar();
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,6 +165,8 @@ public class jFAdministrador extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuAgregarAlimento;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jmenuAgregarCuidador;
     private javax.swing.JMenu salir;
     // End of variables declaration//GEN-END:variables

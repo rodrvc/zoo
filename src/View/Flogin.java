@@ -24,12 +24,15 @@ public class Flogin extends javax.swing.JFrame {
         
         initComponents();
         cargarCombo();
-        this.setLocation(50,50);
-        this.getContentPane().setBackground(Color.WHITE);
+        this.getContentPane().setBackground(Color.white);
         setLocationRelativeTo(null);
+        this.dispose();
+        
         
         
     }
+    
+   
     
     public void cargarCombo(){
         jcbRoles.setModel( new DefaultComboBoxModel());
@@ -61,10 +64,11 @@ public class Flogin extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jcbRoles = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(javax.swing.UIManager.getDefaults().getColor("Button.darcula.color1"));
 
         textUsuario.setText("el@gmail.com");
+        textUsuario.setCaretPosition(1);
         textUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textUsuarioActionPerformed(evt);
@@ -72,8 +76,11 @@ public class Flogin extends javax.swing.JFrame {
         });
 
         textPassword.setText("123");
+        textPassword.setCaretPosition(2);
 
         btnIngresar.setText("Ingresar");
+        btnIngresar.setAutoscrolls(true);
+        btnIngresar.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresarActionPerformed(evt);
@@ -129,7 +136,7 @@ public class Flogin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(151, 151, 151)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +188,7 @@ public class Flogin extends javax.swing.JFrame {
                 System.out.println("Bienvenido Sr." + nombre);
                 jFAdministrador jadm = new jFAdministrador();
                 jadm.setVisible(true);
-                this.dispose();
+             
             }
             
         }else if(roles.equals("cuidador")){
