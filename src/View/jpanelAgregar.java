@@ -12,6 +12,7 @@ import Model.Cuidador;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,14 +28,13 @@ public class jpanelAgregar extends javax.swing.JPanel {
     public jpanelAgregar() {
         initComponents();
         cargarDatos();
-        variableTest();
+       
     }
     
     public void variableTest(){
         for (Cuidador cuidadore : cuidadores) {
             System.out.println(cuidadore.getRut());
         }
-        
     }
     
     
@@ -218,6 +218,14 @@ public class jpanelAgregar extends javax.swing.JPanel {
         String ape = txtAgregarApellidoCuidador.getText();
         String corr = txtAgregarCorreo.getText();
         String pass = txtAgregarPassword.getText();
+        
+        
+        
+        
+        if (!rut.matches("([1-9]{1,2})[.]([1-9]{3,3})[.]([1-9]{3,3})[-]([1-9]|[k])")) {
+            JOptionPane.showMessageDialog(null, "Ingresa run con puntos y guion");
+            txtAgregarRunCuidador.setText("");
+        }
         
         AgregarCuidadores(rut, nom , ape , corr , pass);
         cargarDatos();

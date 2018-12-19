@@ -40,12 +40,11 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
         comboAgregar.addElement("Frutos secos");
         comboAgregar.addElement("Agua");
         
-        
-        
-    
-        
-        
-    }
+        jvegetalesPorcentaje.setText(String.valueOf(ObjenerVegetales()) + "%");
+        jcarnesPorcentaje.setText(String.valueOf(ObtenerCarnes()) + "%");
+        jfrutosPorcentaje.setText(String.valueOf(ObtenerFrutosSecos()) + "%");
+        jaguaPorcentaje.setText(String.valueOf(ObtenerAgua()) + "%");
+     }
     
     
 //    
@@ -88,8 +87,8 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
         jbuttonCancelarAgregarAlimento = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         Aviso = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
         jprogressCarnes = new javax.swing.JProgressBar();
         jProgressVegetales = new javax.swing.JProgressBar();
         jprogressFrutosSecos = new javax.swing.JProgressBar();
@@ -98,6 +97,10 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
         jLabelCarnes = new javax.swing.JLabel();
         jLabelFrutos = new javax.swing.JLabel();
         jLabelAgua = new javax.swing.JLabel();
+        jvegetalesPorcentaje = new javax.swing.JLabel();
+        jcarnesPorcentaje = new javax.swing.JLabel();
+        jfrutosPorcentaje = new javax.swing.JLabel();
+        jaguaPorcentaje = new javax.swing.JLabel();
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -122,6 +125,8 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
 
         Aviso.setText("              ");
 
+        jLabel5.setText("Uzoo");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -132,27 +137,30 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
                 .addGap(97, 97, 97))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(17, 17, 17)
-                            .addComponent(jlabelTextoSeleccionarAlimento)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jComboSeleccionarAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(35, 35, 35)
-                                    .addComponent(jtextCantidadAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel2)))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(70, 70, 70)
-                            .addComponent(jbuttonAgregarAlimento)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbuttonCancelarAgregarAlimento)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(jlabelTextoSeleccionarAlimento)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jComboSeleccionarAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(35, 35, 35)
+                                        .addComponent(jtextCantidadAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel2)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addComponent(jbuttonAgregarAlimento)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbuttonCancelarAgregarAlimento)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel3))
                     .addComponent(Aviso, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,12 +173,13 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtextCantidadAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboSeleccionarAlimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlabelTextoSeleccionarAlimento))
+                    .addComponent(jlabelTextoSeleccionarAlimento)
+                    .addComponent(jLabel5))
                 .addGap(54, 54, 54)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbuttonAgregarAlimento)
                     .addComponent(jbuttonCancelarAgregarAlimento))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Aviso))
@@ -178,17 +187,6 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         jLabel1.setText("CANTIDAD DE ALIMENTO ");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
 
         jProgressVegetales.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -204,6 +202,14 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
 
         jLabelAgua.setText("Agua");
 
+        jvegetalesPorcentaje.setText("  ");
+
+        jcarnesPorcentaje.setText("  ");
+
+        jfrutosPorcentaje.setText("  ");
+
+        jaguaPorcentaje.setText("  ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -211,63 +217,74 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(362, 362, 362)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelVegetales)
-                            .addComponent(jLabelCarnes)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabelAgua)
-                                .addComponent(jLabelFrutos)))
-                        .addGap(70, 70, 70)
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelCarnes)
+                                .addGap(18, 18, 18)
+                                .addComponent(jcarnesPorcentaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelVegetales)
+                                    .addComponent(jLabelFrutos)
+                                    .addComponent(jLabelAgua))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(7, 7, 7)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jaguaPorcentaje, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                                            .addComponent(jfrutosPorcentaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(2, 2, 2)
+                                        .addComponent(jvegetalesPorcentaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jProgressAgua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jprogressCarnes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jProgressVegetales, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
                             .addComponent(jprogressFrutosSecos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(360, Short.MAX_VALUE))
+                        .addGap(52, 52, 52)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(378, 378, 378)
+                        .addComponent(jLabel1)))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
+                        .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jProgressVegetales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelVegetales))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabelVegetales)
+                                .addComponent(jvegetalesPorcentaje)))
                         .addGap(67, 67, 67)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelCarnes)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabelCarnes)
+                                .addComponent(jcarnesPorcentaje))
                             .addComponent(jprogressCarnes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(72, 72, 72)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jprogressFrutosSecos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelFrutos))
-                        .addGap(10, 10, 10))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jProgressAgua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabelFrutos)
+                                .addComponent(jfrutosPorcentaje)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelAgua, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jProgressAgua, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jaguaPorcentaje))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelAgua)
-                        .addGap(88, 88, 88)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(52, 52, 52)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(75, 75, 75))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -279,37 +296,36 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
         
         seleccionDeComidaParaAgregar = jComboSeleccionarAlimento.getSelectedItem().toString();
         
-        if (seleccionDeComidaParaAgregar.equals("Alimento")) {
+        if (seleccionDeComidaParaAgregar.equals("Alimento"))
+        {
                         JOptionPane.showMessageDialog(null, "Debes Ingresar un Alimento o Agua de la combobox"
                         , "AGREGAR COMIDA", JOptionPane.CLOSED_OPTION);
         }
         else
         {
         //CANTIDAD NECESITA PASAR DESDE STRING A INT *(TRY CATCH)
-            try 
-            {
-                cantidadDeComidaParaAgregar = Integer.parseInt(jtextCantidadAlimento.getText());
-             } 
-             catch (Exception e) { // vaciara el campo , mostrara mensaje, y hara focus en el campo erroneo
+                try 
+                {
+                    cantidadDeComidaParaAgregar = Integer.parseInt(jtextCantidadAlimento.getText());
+                 } 
+                catch (Exception e) { // vaciara el campo , mostrara mensaje, y hara focus en el campo erroneo
                             jtextCantidadAlimento.setText("");
                             JOptionPane.showMessageDialog(null, "Debes Ingresar un numero de kg"
                             , "AGREGAR COMIDA", JOptionPane.CLOSED_OPTION);
                             jtextCantidadAlimento.requestFocus();
-              }
-        //*** FIN TRY CATCH
-        
-        
+                }
+        //*** FIN TRY CATCH**
         // No SUPERAR EL MAXIMO DE CANTIDAD
-        if (CargarAlimentos(seleccionDeComidaParaAgregar, cantidadDeComidaParaAgregar) == 0) { // 0 representa la operacion no realizada por sobrecarga en cantidad
-             JOptionPane.showMessageDialog(null, "La Cantidad de comida sobrepasa el almacen"
+                 if (CargarAlimentos(seleccionDeComidaParaAgregar, cantidadDeComidaParaAgregar) == 0) { // 0 representa la operacion no realizada por sobrecarga en cantidad
+                            JOptionPane.showMessageDialog(null, "La Cantidad de comida sobrepasa el almacen"
                         , "AGREGAR COMIDA", JOptionPane.CLOSED_OPTION); 
-        }
-        else
-        {
-        CargarAlimentos(seleccionDeComidaParaAgregar, cantidadDeComidaParaAgregar);
-        }
-         cargarBarrasyCombobox();
-        }
+                }
+                else
+                {
+                CargarAlimentos(seleccionDeComidaParaAgregar, cantidadDeComidaParaAgregar);
+                }
+                cargarBarrasyCombobox();
+            }
     }//GEN-LAST:event_jbuttonAgregarAlimentoActionPerformed
 
     private void jProgressVegetalesStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jProgressVegetalesStateChanged
@@ -324,19 +340,23 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelAgua;
     private javax.swing.JLabel jLabelCarnes;
     private javax.swing.JLabel jLabelFrutos;
     private javax.swing.JLabel jLabelVegetales;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JProgressBar jProgressAgua;
     private javax.swing.JProgressBar jProgressVegetales;
+    private javax.swing.JLabel jaguaPorcentaje;
     private javax.swing.JButton jbuttonAgregarAlimento;
     private javax.swing.JButton jbuttonCancelarAgregarAlimento;
+    private javax.swing.JLabel jcarnesPorcentaje;
+    private javax.swing.JLabel jfrutosPorcentaje;
     private javax.swing.JLabel jlabelTextoSeleccionarAlimento;
     private javax.swing.JProgressBar jprogressCarnes;
     private javax.swing.JProgressBar jprogressFrutosSecos;
     private javax.swing.JTextField jtextCantidadAlimento;
+    private javax.swing.JLabel jvegetalesPorcentaje;
     // End of variables declaration//GEN-END:variables
 }

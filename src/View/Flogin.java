@@ -26,10 +26,7 @@ public class Flogin extends javax.swing.JFrame {
         cargarCombo();
         this.getContentPane().setBackground(Color.white);
         setLocationRelativeTo(null);
-        this.dispose();
-        
-        
-        
+       
     }
     
    
