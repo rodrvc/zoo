@@ -47,6 +47,9 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
      }
     
     
+    
+    
+    
 //    
 //   public void comidaSeAcaba(){
 //       a  = new ActionListener() {
@@ -319,10 +322,6 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
                  if (CargarAlimentos(seleccionDeComidaParaAgregar, cantidadDeComidaParaAgregar) == 0) { // 0 representa la operacion no realizada por sobrecarga en cantidad
                             JOptionPane.showMessageDialog(null, "La Cantidad de comida sobrepasa el almacen"
                         , "AGREGAR COMIDA", JOptionPane.CLOSED_OPTION); 
-                }
-                else
-                {
-                CargarAlimentos(seleccionDeComidaParaAgregar, cantidadDeComidaParaAgregar);
                 }
                 cargarBarrasyCombobox();
             }
