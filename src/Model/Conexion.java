@@ -19,7 +19,6 @@ public class Conexion {
     {
         
         try{
-            System.out.println("ella");
             Class.forName("com.mysql.jdbc.Driver");
             con = (Connection) DriverManager.getConnection(this.url, this.user, this.password);
             

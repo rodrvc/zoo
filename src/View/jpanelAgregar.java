@@ -28,15 +28,7 @@ public class jpanelAgregar extends javax.swing.JPanel {
     public jpanelAgregar() {
         initComponents();
         cargarDatos();
-       
     }
-    
-    public void variableTest(){
-        for (Cuidador cuidadore : cuidadores) {
-            System.out.println(cuidadore.getRut());
-        }
-    }
-    
     
     
     public  void cargarDatos(){
@@ -56,6 +48,13 @@ public class jpanelAgregar extends javax.swing.JPanel {
         }
         
         
+    }
+    
+    public boolean camposVacios(String run, String nom , String ape ,String Corr, String pass){
+        if (run.equals("")|| nom.equals("") || ape.equals("") || Corr.equals("") || pass.equals("") ) {
+            return true;
+        }
+        return false;
     }
 
     
@@ -213,22 +212,42 @@ public class jpanelAgregar extends javax.swing.JPanel {
 
     private void jbtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAgregarActionPerformed
         // TODO add your handling code here:
-        String rut = txtAgregarRunCuidador.getText();
-        String nom = txtAgregarNombreCuidador.getText();
-        String ape = txtAgregarApellidoCuidador.getText();
-        String corr = txtAgregarCorreo.getText();
-        String pass = txtAgregarPassword.getText();
+        String rut = txtAgregarRunCuidador.getText().trim();
+        String nom = txtAgregarNombreCuidador.getText().trim();
+        String ape = txtAgregarApellidoCuidador.getText().trim();
+        String corr = txtAgregarCorreo.getText().trim();
+        String pass = txtAgregarPassword.getText().trim();
         
-        
-        
-        
-        if (!rut.matches("([1-9]{1,2})[.]([1-9]{3,3})[.]([1-9]{3,3})[-]([1-9]|[k])")) {
+        if (camposVacios(rut , nom , ape, corr , pass) ) {
+             JOptionPane.showMessageDialog(null, "No puedes dejar campos sin completar");
+        } 
+        else if(!rut.matches("((([1-9]{1,1})+([0-9]{1,1}))|([1-9]{1,1}))[.]([0-9]{3,3})[.]([0-9]{3,3})[-]([0-9]|[k])"))
+        {
             JOptionPane.showMessageDialog(null, "Ingresa run con puntos y guion");
             txtAgregarRunCuidador.setText("");
+       
+        }
+        else if(!nom.matches("([a-zA-z])+"))
+        {
+             JOptionPane.showMessageDialog(null, "El campo nombre solo contiene letras");
+            txtAgregarNombreCuidador.setText("");
+        }
+        else if(!ape.matches("([a-zA-z])+"))
+        {
+            JOptionPane.showMessageDialog(null, "El campo apellido solo contiene letras");
+            txtAgregarApellidoCuidador.setText("");
+        }
+        else if(!pass.matches("([\\w]{4,8})"))
+        {
+            JOptionPane.showMessageDialog(null, "no debes utilizar espacios ni caracteres no permitidos  \n ademas debes usar de 4 a 8 digitos");
+            txtAgregarPassword.setText("");
+        }
+        else
+        {
+            AgregarCuidadores(rut, nom , ape , corr , pass);
+            cargarDatos();
         }
         
-        AgregarCuidadores(rut, nom , ape , corr , pass);
-        cargarDatos();
     }//GEN-LAST:event_jbtnAgregarActionPerformed
 
 

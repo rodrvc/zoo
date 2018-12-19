@@ -203,7 +203,6 @@ public class Flogin extends javax.swing.JFrame {
         }else {
             JOptionPane.showMessageDialog(null, "Debes seleccionar un Rol", "INICIO SESION", JOptionPane.CLOSED_OPTION);
         }
-           
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
