@@ -2,28 +2,93 @@
 package View;
 
 
+import Controller.ControllerComidas;
 import static Controller.ControllerComidas.CargarAlimentos;
 import static Controller.ControllerComidas.ObjenerVegetales;
 import static Controller.ControllerComidas.ObtenerAgua;
 import static Controller.ControllerComidas.ObtenerCarnes;
 import static Controller.ControllerComidas.ObtenerFrutosSecos;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
+
+
 
 
 
 public class jpanelAgregarComida extends javax.swing.JPanel {
-
+     static int n = 100 ; 
+    static Timer t ; 
+    static ActionListener a;
+    
     public jpanelAgregarComida() {
         initComponents();
         this.setBackground(Color.white);
         cargarBarrasyCombobox();
+        laComidaSeAcaba();
+    }
+    
+    public void laComidaSeAcaba(){
+   
+       a  = new ActionListener(){
+           
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    int v = ObjenerVegetales();
+                    int c = ObtenerCarnes();
+                    int f = ObtenerFrutosSecos();
+                    int a = ObtenerAgua();
+                    String alerta = "";
+                    
+                     jniveles.setText("Niveles en orden");
+                    
+                    //v<100 && c < 80 && f <30 && a < 15
+                    if (v > 0) {
+                        jProgressVegetales.setValue(v);
+                        jvegetalesPorcentaje.setText(v + "kg");
+                    }else  { v = 0; alerta = alerta + "Hervivoros";}
+                    
+                    if (c > 0) {
+                        jprogressCarnes.setValue(c);
+                        jcarnesPorcentaje.setText(c + "kg");
+                    } else {c= 0; alerta = alerta + "Carnivoros";}
+                    
+                    if (f > 0 ) {
+                        jfrutosPorcentaje.setText(f + "kg");
+                        jprogressFrutosSecos.setValue(f);
+                    }else {f =0 ; alerta = alerta + "Omnivoros";}
+                    if (a > 0) {
+                          jaguaPorcentaje.setText(f + "kg");
+                        jProgressAgua.setValue(f);
+                    }
+                         if (v== 0 || c == 0 || f == 0 || a == 0) {
+                             jniveles.setForeground(Color.red);
+                             jniveles.setText("Ponatencion a los siguientes niveles " + alerta);
+                             jniveles.setForeground(Color.ORANGE);
+                             
+                    }else{
+                             jniveles.setText("Niveles en Orden");
+                             jniveles.setForeground(Color.green);
+                         }
+            }
+        };
+        
+        t = new Timer(100, a);
+        t.start();
     }
     
 
     public void cargarBarrasyCombobox(){
         //cargar barras de comidas
+        jProgressVegetales.setMaximum(700);
+        jprogressCarnes.setMaximum(200);
+        jprogressFrutosSecos.setMaximum(300);
+        jProgressAgua.setMaximum(1500);
+        
+        
         jProgressVegetales.setValue(ObjenerVegetales());
         jprogressFrutosSecos.setValue(ObtenerFrutosSecos());
         jprogressCarnes.setValue(ObtenerCarnes());
@@ -40,37 +105,8 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
         comboAgregar.addElement("Frutos secos");
         comboAgregar.addElement("Agua");
         
-        jvegetalesPorcentaje.setText(String.valueOf(ObjenerVegetales()) + "%");
-        jcarnesPorcentaje.setText(String.valueOf(ObtenerCarnes()) + "%");
-        jfrutosPorcentaje.setText(String.valueOf(ObtenerFrutosSecos()) + "%");
-        jaguaPorcentaje.setText(String.valueOf(ObtenerAgua()) + "%");
      }
     
-    
-    
-    
-    
-//    
-//   public void comidaSeAcaba(){
-//       a  = new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                n = n-1 ; 
-//                jProgressVegetales.setValue(n);
-//            }
-//        };
-//        
-//        t = new Timer(3000, a);
-//        t.start();
-//    }
-//    
-
- 
-    
- 
-
-
-   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -104,6 +140,7 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
         jcarnesPorcentaje = new javax.swing.JLabel();
         jfrutosPorcentaje = new javax.swing.JLabel();
         jaguaPorcentaje = new javax.swing.JLabel();
+        jniveles = new javax.swing.JLabel();
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -213,6 +250,8 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
 
         jaguaPorcentaje.setText("  ");
 
+        jniveles.setText("Indicador");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -250,7 +289,10 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(378, 378, 378)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(280, 280, 280)
+                        .addComponent(jniveles, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -287,7 +329,9 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(75, 75, 75))
+                .addGap(44, 44, 44)
+                .addComponent(jniveles)
+                .addGap(15, 15, 15))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -329,6 +373,7 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
 
     private void jProgressVegetalesStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jProgressVegetalesStateChanged
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jProgressVegetalesStateChanged
 
 
@@ -353,6 +398,7 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
     private javax.swing.JLabel jcarnesPorcentaje;
     private javax.swing.JLabel jfrutosPorcentaje;
     private javax.swing.JLabel jlabelTextoSeleccionarAlimento;
+    private javax.swing.JLabel jniveles;
     private javax.swing.JProgressBar jprogressCarnes;
     private javax.swing.JProgressBar jprogressFrutosSecos;
     private javax.swing.JTextField jtextCantidadAlimento;

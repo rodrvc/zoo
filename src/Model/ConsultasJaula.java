@@ -41,8 +41,9 @@ public class ConsultasJaula extends Conexion{
                 j.setIdJaula(rs.getString(1));
                 j.setIdTipoJuala(rs.getString(2));
                 j.setTamanio(rs.getString(3));
-                j.setTamanio(rs.getString(4));
-                j.setIdSector(rs.getString(5));
+                 j.setIdSector(rs.getString(4));
+                j.setIdcapacidad(rs.getString(5));
+               
                 ListaBaseJaulas.add(j);
                 
             }

@@ -5,17 +5,23 @@
  */
 package View;
 
+
 import static Controller.ControllerAdministrativo.devolverAnimales;
 import static Controller.ControllerAdministrativo.devolverCuidadores;
 import static Controller.ControllerAdministrativo.devolverJaulas;
 import static Controller.ControllerAdministrativo.devolverSectores;
+import static Controller.ControllerAdministrativo.devolverTipoAnimales;
+import static Controller.ControllerComidas.actualizarCantidadAnimales;
 import Model.Animal;
 import Model.Cuidador;
 import Model.Jaula;
 import Model.Sector;
+import Model.TipoAnimal;
 import static View.jpanelAgregar.cuidadores;
+import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,6 +33,8 @@ public class jpanelAgregarAnimal extends javax.swing.JPanel {
     public static ArrayList<Cuidador> cuidadores = devolverCuidadores();
     public static ArrayList<Jaula> jaulas = devolverJaulas();
     public static ArrayList<Sector> sectores = devolverSectores();
+    public static ArrayList<TipoAnimal> tipos= devolverTipoAnimales();
+    
     
     
     /**
@@ -36,6 +44,18 @@ public class jpanelAgregarAnimal extends javax.swing.JPanel {
         initComponents();
         cargarDatos();
     }
+    
+    
+     int ObjetenerCapacidad(Jaula j){
+        int contCapacidad = 0;
+        for (Animal animale : animales) {
+            if (animale.getIdJaula().equals(j.getIdJaula()) ) {
+                contCapacidad ++;
+            }
+        }
+        return contCapacidad;
+    }
+    
     
     public  void cargarDatos(){
        jTableAnimales.setModel( new DefaultTableModel(null , new String[]{"ID" , "NOMBRE" , "SEXO" , "TIPO" , "JAULA"} ));
@@ -47,10 +67,15 @@ public class jpanelAgregarAnimal extends javax.swing.JPanel {
        
        Object[] o = new Object[6];
         for (Animal animale : animales) {
+            
             o[0] = animale.getIdAnimal();
             o[1] = animale.getNombre();
             o[2] = animale.getSexo();
-            o[3] = animale.getIdTIpo();
+            for (TipoAnimal tipo : tipos) {
+                if (animale.getIdTIpo().equals(tipo.getIdTipo())) {
+                    o[3] = tipo.getTipo();
+                }
+            }
             o[4] = animale.getIdJaula();
             tba.addRow(o);
         }
@@ -63,27 +88,45 @@ public class jpanelAgregarAnimal extends javax.swing.JPanel {
               cbCuidador.addElement(cui.getRut() + "(" + cui.getNombre()+ ")");
         }
         
-        jComboJaula.setModel(new DefaultComboBoxModel());
-        DefaultComboBoxModel cbJaula = (DefaultComboBoxModel) jComboJaula.getModel();
-        cbJaula.removeAllElements();
+        jComboSector.setModel(new DefaultComboBoxModel());
+        DefaultComboBoxModel cbSector = (DefaultComboBoxModel) jComboSector.getModel();
+        cbSector.removeAllElements();
+        cbSector.addElement("Seleccionar");
         for (Sector sec : sectores) {
-            
+            cbSector.addElement(sec.getIdSector() + "-" + sec.getNombreSector());
         }
         
+         jComboJaula.setModel( new DefaultComboBoxModel()); //este combo se llena en base al sector
+        DefaultComboBoxModel comboJaula = (DefaultComboBoxModel) jComboJaula.getModel();
+        comboJaula.addElement("Seleccionar");
+
         
-        
-    
-        
-        
-        
-    }
-    
-    public boolean camposVacios(String run, String nom , String ape ,String Corr, String pass){
-        if (run.equals("")|| nom.equals("") || ape.equals("") || Corr.equals("") || pass.equals("") ) {
-            return true;
+         jComboTipo.setModel(new DefaultComboBoxModel());
+         DefaultComboBoxModel cbTipo =  (DefaultComboBoxModel) jComboTipo.getModel();
+         cbTipo.removeAllElements();
+         cbTipo.addElement("Seleccionar");
+         for (TipoAnimal a : tipos) {
+            cbTipo.addElement(a.getTipo());
         }
-        return false;
-    }
+        
+         jComboSexo.setModel(new DefaultComboBoxModel());
+         DefaultComboBoxModel cbSexo = (DefaultComboBoxModel) jComboSexo.getModel();
+         cbSexo.removeAllElements();
+        cbSexo.addElement("Seleccionar");
+        cbSexo.addElement("macho");
+        cbSexo.addElement("hembra");
+        
+        actualizarCantidadAnimales();
+    }  
+    
+    
+        
+    
+    
+    
+    
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -98,7 +141,6 @@ public class jpanelAgregarAnimal extends javax.swing.JPanel {
         jLabelTituloAgregarAnimal = new javax.swing.JLabel();
         jlabelNombreAnimal = new javax.swing.JLabel();
         jLabelSexoAnimal = new javax.swing.JLabel();
-        jTextSexoAnimal = new javax.swing.JTextField();
         jComboTipo = new javax.swing.JComboBox<>();
         jLabelTipoAnimal = new javax.swing.JLabel();
         jLabelCuidadorAnimal = new javax.swing.JLabel();
@@ -111,6 +153,7 @@ public class jpanelAgregarAnimal extends javax.swing.JPanel {
         jButtonCancel = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableAnimales = new javax.swing.JTable();
+        jComboSexo = new javax.swing.JComboBox<>();
 
         jTextNombreAnimal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +181,11 @@ public class jpanelAgregarAnimal extends javax.swing.JPanel {
         jComboCuidador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar" }));
 
         jComboSector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar" }));
+        jComboSector.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboSectorItemStateChanged(evt);
+            }
+        });
 
         jLabelSector.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
         jLabelSector.setText("Sector:");
@@ -169,24 +217,27 @@ public class jpanelAgregarAnimal extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(jTableAnimales);
 
+        jComboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jlabelNombreAnimal)
-                                        .addComponent(jLabelSexoAnimal))
-                                    .addGap(45, 45, 45))
+                                    .addGap(21, 21, 21)
+                                    .addComponent(jlabelNombreAnimal)
+                                    .addGap(24, 24, 24))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelTipoAnimal)
+                                    .addGap(25, 25, 25)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabelSexoAnimal)
+                                        .addComponent(jLabelTipoAnimal))
                                     .addGap(41, 41, 41)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,12 +249,14 @@ public class jpanelAgregarAnimal extends javax.swing.JPanel {
                                             .addComponent(jLabelSector))))
                                 .addGap(41, 41, 41)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboCuidador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextNombreAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextSexoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboSector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboJaula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jComboSector, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboJaula, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboCuidador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextNombreAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jComboSexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,49 +265,51 @@ public class jpanelAgregarAnimal extends javax.swing.JPanel {
                                 .addComponent(jButtonAgregarAnimal)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButtonCancel)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
                         .addComponent(jLabelTituloAgregarAnimal)
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextNombreAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlabelNombreAnimal))
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelSexoAnimal, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextSexoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelTipoAnimal)
-                            .addComponent(jComboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelCuidadorAnimal)
-                            .addComponent(jComboCuidador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelSector)
-                            .addComponent(jComboSector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelJaula)
-                            .addComponent(jComboJaula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonAgregarAnimal)
-                            .addComponent(jButtonCancel))))
-                .addContainerGap(121, Short.MAX_VALUE))
+                            .addComponent(jlabelNombreAnimal)
+                            .addComponent(jTextNombreAnimal))
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabelTipoAnimal)
+                                    .addComponent(jComboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(10, 10, 10)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabelCuidadorAnimal)
+                                    .addComponent(jComboCuidador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabelSector)
+                                    .addComponent(jComboSector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(14, 14, 14)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabelJaula)
+                                    .addComponent(jComboJaula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButtonAgregarAnimal)
+                                    .addComponent(jButtonCancel)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabelSexoAnimal)
+                                .addComponent(jComboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(206, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -264,7 +319,92 @@ public class jpanelAgregarAnimal extends javax.swing.JPanel {
 
     private void jButtonAgregarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarAnimalActionPerformed
         // TODO add your handling code here:
+        
+        String idAnimal = String.valueOf(animales.size()+1);
+        String nom = jTextNombreAnimal.getText();
+        String sexo = jComboSexo.getSelectedItem().toString();
+        String idTipo = jComboTipo.getSelectedItem().toString(); //  agregaron palabras
+        String jaula = jComboJaula.getSelectedItem().toString(); //  agregaron palabras
+        
+        for (TipoAnimal tipo : tipos) {
+            if (tipo.getTipo().equals(idTipo)) {
+                idTipo = tipo.getIdTipo(); // 
+            }
+        }
+        
+        String[] SeleccionarSoloJaula = jaula.split(" ");
+        
+        //validaciones
+        if (!nom.matches("[a-zA-Z]+")) {
+             JOptionPane.showMessageDialog(null, "Ingresa un nombre valido!");
+             jTextNombreAnimal.setText("");
+             jTextNombreAnimal.requestFocus();
+        }
+        else if(sexo.equals("Seleccionar"))
+        {
+            JOptionPane.showMessageDialog(null, "Debes selecionar un sexo");
+        }
+        else if (idTipo.equals("Seleccionar")) 
+        {
+            JOptionPane.showMessageDialog(null, "Debes selecionar un tipo de animal");
+        }
+        else if(SeleccionarSoloJaula[0].equals("Seleccionar"))
+        {
+             JOptionPane.showMessageDialog(null, "Debes selecionar una jaula");
+        }
+        else 
+        {
+            Controller.ControllerAdministrativo.AgregarAnimal(idAnimal, nom, sexo, idTipo, SeleccionarSoloJaula[0]);
+            cargarDatos();
+        }
+        
     }//GEN-LAST:event_jButtonAgregarAnimalActionPerformed
+
+    private void jComboSectorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboSectorItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            
+       
+        String sectorSelecionado = null ; 
+         
+        jComboJaula.setModel( new DefaultComboBoxModel());
+       
+        DefaultComboBoxModel comboJaula = (DefaultComboBoxModel) jComboJaula.getModel();
+        
+        comboJaula.addElement("Seleccionar");
+         sectorSelecionado=jComboSector.getSelectedItem().toString();
+         String SoloIdSelecionadoDeSector[] = sectorSelecionado.split("-"); // se selecciona solo la parte del id del sector
+            for (Jaula jaula : jaulas) {
+                if (SoloIdSelecionadoDeSector[0].equals(jaula.getIdSector())) {
+                    comboJaula.addElement(jaula.getIdJaula()+"  ("+ ObjetenerCapacidad(jaula)+ " / "+jaula.getIdcapacidad()+")"  );
+                }
+            }
+            
+            String tipoAnimal = null ; 
+            
+//            jComboTipo.setModel(new DefaultComboBoxModel());
+//            DefaultComboBoxModel cbTipo =  (DefaultComboBoxModel) jComboTipo.getModel();
+            
+//            for (Animal a : animales) {
+//                if (a.getIdTIpo().matches("1-10")) {
+//                    cbTipo.addElement(a.getIdTIpo());
+//                }
+//                else if(a.getIdTIpo().matches(tipoAnimal)){
+//                    
+//                }
+//                else if (a.getIdTIpo().matches(tipoAnimal)) {
+//                    
+//                }
+//                else if (a.getIdTIpo().matches(tipoAnimal)) {
+//                    
+//                }
+//            }
+            
+            
+            
+            
+        }
+    }//GEN-LAST:event_jComboSectorItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -273,6 +413,7 @@ public class jpanelAgregarAnimal extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboCuidador;
     private javax.swing.JComboBox<String> jComboJaula;
     private javax.swing.JComboBox<String> jComboSector;
+    private javax.swing.JComboBox<String> jComboSexo;
     private javax.swing.JComboBox<String> jComboTipo;
     private javax.swing.JLabel jLabelCuidadorAnimal;
     private javax.swing.JLabel jLabelJaula;
@@ -283,7 +424,6 @@ public class jpanelAgregarAnimal extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableAnimales;
     private javax.swing.JTextField jTextNombreAnimal;
-    private javax.swing.JTextField jTextSexoAnimal;
     private javax.swing.JLabel jlabelNombreAnimal;
     // End of variables declaration//GEN-END:variables
 }

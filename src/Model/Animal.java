@@ -24,6 +24,17 @@ public class Animal {
         this.idJaula = idJaula;
     }
 
+    public Animal(String nombre, String sexo, String idTIpo, String idJaula) {
+        this.nombre = nombre;
+        this.sexo = sexo;
+        this.idTIpo = idTIpo;
+        this.idJaula = idJaula;
+    }
+    
+    
+    
+    
+
     public Animal() {
     }
     
@@ -68,5 +79,7 @@ public class Animal {
     public void setIdJaula(String idJaula) {
         this.idJaula = idJaula;
     }
+    
+    
 
 }

@@ -30,7 +30,7 @@ public class ConsultasAnimal extends Conexion{
         ResultSet rs = null ;
         Connection con = getConexion();
       
-        String sql = "SELECT * FROM animal " ;
+        String sql = "SELECT * FROM animal order by idJaula asc" ;
     
         
         try {
@@ -76,13 +76,13 @@ public class ConsultasAnimal extends Conexion{
        
         
          try {
-            String sql = "insert into cuidador values(?, ?, ?, ?, ?)";
+            String sql = "insert into animal values( ?,?, ?, ?,?)";
             CallableStatement cs = con.prepareCall(sql);
             cs.setString(1, a.getIdAnimal());
             cs.setString(2, a.getNombre());
             cs.setString(3, a.getSexo());
-            cs.setString(4, a.getIdTIpo());
-            cs.setString(5, a.getIdJaula());
+            cs.setInt(4, Integer.parseInt(a.getIdTIpo()));
+            cs.setInt(5,Integer.parseInt(a.getIdJaula()));
             //podria agregar peso// 
             
             cs.executeUpdate(); 
@@ -98,4 +98,171 @@ public class ConsultasAnimal extends Conexion{
             }
         } 
     }
+    
+    public int cargarCantidadDeAnimalesHervivoros() {//se encargar de manipular la listaBase
+
+        PreparedStatement ps = null ; 
+        ResultSet rs = null ;
+        Connection con = getConexion();
+        int resultado = 0 ;
+      
+        String sql = "select count(*) from tipoanimal where idTipo between 1 and 9 and tipo is not null;" ;
+    
+        
+        try {
+            
+            ps = con.prepareStatement(sql);
+  
+            rs = ps.executeQuery(); 
+            
+            
+            while (rs.next()) {  
+                 int a;
+                a = rs.getInt(1);
+               
+               
+           
+                resultado = a ; 
+            }
+            
+        } catch (SQLException e) {
+            System.err.print(e);
+    
+        }finally {
+                try {
+                    con.close();
+            } catch (SQLException e) {
+                System.err.println(e);             
+            }
+        } 
+         System.out.println(resultado);
+       return resultado;
+       
+    }
+    
+    public int cargarCantidadDeAnimalesCarnivoros() {//se encargar de manipular la listaBase
+
+        PreparedStatement ps = null ; 
+        ResultSet rs = null ;
+        Connection con = getConexion();
+        int resultado = 0 ;
+      
+        String sql = "select count(*) from tipoanimal where idTipo between 10 and 19 and tipo is not null;" ;
+    
+        
+        try {
+            
+            ps = con.prepareStatement(sql);
+  
+            rs = ps.executeQuery(); 
+            
+            
+            while (rs.next()) {  
+                 int a;
+                a = rs.getInt(1);
+               
+               
+           
+                resultado = a ; 
+            }
+            
+        } catch (SQLException e) {
+            System.err.print(e);
+    
+        }finally {
+                try {
+                    con.close();
+            } catch (SQLException e) {
+                System.err.println(e);             
+            }
+        } 
+         System.out.println(resultado);
+       return resultado;
+       
+    }
+    
+    public int cargarCantidadDeAnimalesObnivoros() {//se encargar de manipular la listaBase
+
+        PreparedStatement ps = null ; 
+        ResultSet rs = null ;
+        Connection con = getConexion();
+        int resultado = 0 ;
+      
+        String sql = "select count(*) from tipoanimal where idTipo between 30 and 39 and tipo is not null;" ;
+    
+        
+        try {
+            
+            ps = con.prepareStatement(sql);
+  
+            rs = ps.executeQuery(); 
+            
+            
+            while (rs.next()) {  
+                 int a;
+                a = rs.getInt(1);
+               
+               
+           
+                resultado = a ; 
+            }
+            
+        } catch (SQLException e) {
+            System.err.print(e);
+    
+        }finally {
+                try {
+                    con.close();
+            } catch (SQLException e) {
+                System.err.println(e);             
+            }
+        } 
+         System.out.println(resultado);
+       return resultado;
+       
+    }
+    
+    public int cargarCantidadDeAnimales() {//se encargar de manipular la listaBase
+
+        PreparedStatement ps = null ; 
+        ResultSet rs = null ;
+        Connection con = getConexion();
+        int resultado = 0 ;
+      
+        String sql = "select count(*) from tipoanimal where tipo is not null;" ;
+    
+        
+        try {
+            
+            ps = con.prepareStatement(sql);
+  
+            rs = ps.executeQuery(); 
+            
+            
+            while (rs.next()) {  
+                 int a;
+                a = rs.getInt(1);
+               
+               
+           
+                resultado = a ; 
+            }
+            
+        } catch (SQLException e) {
+            System.err.print(e);
+    
+        }finally {
+                try {
+                    con.close();
+            } catch (SQLException e) {
+                System.err.println(e);             
+            }
+        } 
+         System.out.println(resultado);
+       return resultado;
+       
+    }
+    
+    
+    
 }

@@ -5,6 +5,8 @@
  */
 package Controller;
 
+import static Controller.ControllerComidas.vegetales;
+import Model.ConsultasAnimal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -19,10 +21,66 @@ public class ControllerComidas {
     static Timer t ; 
     static ActionListener a;
     
+    
     static int vegetales =  50;
     private static int Carnes = 30;
     private static int FrutosSecos =  90;
     private static int Agua = 20 ;
+    
+    public static int cantHervivoros;
+    public static int cantCarnivoros;
+    public static int cantOmnivoros;
+    public static int cantAnimales;
+    
+    
+    public static void actualizarCantidadAnimales(){
+        cantHervivoros = ObtenerCantidadDeHervivores();
+        cantCarnivoros = ObtenerCantidadDeCarnivores();
+        cantOmnivoros = ObtenerCantidadDeOmnivoros();
+        cantAnimales = ObtenerCantidadDeAnimales();
+    }
+    
+
+    
+      
+    public static void comidaSeAcaba(){
+        
+       a  = new ActionListener(){
+           
+            @Override
+            public void actionPerformed(ActionEvent e ) {
+                vegetales = vegetales - cantAnimales; 
+                Carnes = Carnes - cantCarnivoros;
+                FrutosSecos = FrutosSecos -cantOmnivoros;
+                Agua = Agua - cantAnimales;
+            }
+        };
+       
+      
+        t = new Timer(5000, a);
+        t.start();
+    }
+    
+    
+    
+        public static int ObtenerCantidadDeHervivores(){
+       ConsultasAnimal conA = new ConsultasAnimal();
+       return conA.cargarCantidadDeAnimalesHervivoros();
+    }
+    
+    public static int ObtenerCantidadDeCarnivores(){
+       ConsultasAnimal conA = new ConsultasAnimal();
+       return conA.cargarCantidadDeAnimalesCarnivoros();
+    }
+    public static int ObtenerCantidadDeOmnivoros(){
+       ConsultasAnimal conA = new ConsultasAnimal();
+       return conA.cargarCantidadDeAnimalesObnivoros();
+    }
+    public static int ObtenerCantidadDeAnimales(){
+       ConsultasAnimal conA = new ConsultasAnimal();
+       return conA.cargarCantidadDeAnimales();
+    }
+    
     
     public static int consumo(String peso){
         int consumo = 0 ; 
