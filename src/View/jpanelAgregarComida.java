@@ -20,7 +20,7 @@ import javax.swing.Timer;
 
 
 public class jpanelAgregarComida extends javax.swing.JPanel {
-     static int n = 100 ; 
+    static int n = 100 ; 
     static Timer t ; 
     static ActionListener a;
     
@@ -32,47 +32,77 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
     }
     
     public void laComidaSeAcaba(){
-   
-       a  = new ActionListener(){
+         
+        a  = new ActionListener(){
            
             @Override
             public void actionPerformed(ActionEvent e) {
-                    int v = ObjenerVegetales();
-                    int c = ObtenerCarnes();
-                    int f = ObtenerFrutosSecos();
-                    int a = ObtenerAgua();
-                    String alerta = "";
+                    int v = 0;
+                    int c = 0;
+                    int f = 0;
+                    int a = 0;
                     
-                     jniveles.setText("Niveles en orden");
+                    v = ObjenerVegetales();
+                    c = ObtenerCarnes();
+                    f = ObtenerFrutosSecos();
+                    a = ObtenerAgua();
+                    String alertaV = "";
+                    String alertaC = "";
+                    String alertaF = "";
+                    String alertaA = "";
+                    
+                 
                     
                     //v<100 && c < 80 && f <30 && a < 15
                     if (v > 0) {
                         jProgressVegetales.setValue(v);
                         jvegetalesPorcentaje.setText(v + "kg");
-                    }else  { v = 0; alerta = alerta + "Hervivoros";}
+                    }else  
+                    { 
+                         jProgressVegetales.setValue(0);
+                        jvegetalesPorcentaje.setText("0kg");
+                        alertaV =  "-Hervivoros";
+                    }
                     
                     if (c > 0) {
                         jprogressCarnes.setValue(c);
                         jcarnesPorcentaje.setText(c + "kg");
-                    } else {c= 0; alerta = alerta + "Carnivoros";}
+                    } else {
+                        jprogressCarnes.setValue(0);
+                        jcarnesPorcentaje.setText("0kg");
+                        alertaC =  "-Carnivoros";
+                    }
                     
                     if (f > 0 ) {
                         jfrutosPorcentaje.setText(f + "kg");
                         jprogressFrutosSecos.setValue(f);
-                    }else {f =0 ; alerta = alerta + "Omnivoros";}
-                    if (a > 0) {
-                          jaguaPorcentaje.setText(f + "kg");
-                        jProgressAgua.setValue(f);
                     }
-                         if (v== 0 || c == 0 || f == 0 || a == 0) {
-                             jniveles.setForeground(Color.red);
-                             jniveles.setText("Ponatencion a los siguientes niveles " + alerta);
-                             jniveles.setForeground(Color.ORANGE);
+                    else 
+                    {
+                        jfrutosPorcentaje.setText("0");
+                        jprogressFrutosSecos.setValue(0);
+                         alertaF =  "-Omnivoros";
+                    }
+                    
+                    if (a > 0) {
+                          jaguaPorcentaje.setText(a+ "kg");
+                          jProgressAgua.setValue(a);
+                    }
+                    else 
+                    {
+                          jaguaPorcentaje.setText("0"+ "kg");
+                          jProgressAgua.setValue(0);
+                          alertaA = "-Agua";
+                    }
+                    if (v <= 0 || c <=  0 || f <=  0 ||  a <=  0) {
+                           
+                       jniveles.setText("Ponatencion a los siguientes niveles " + alertaV + alertaC + alertaF + alertaA  );
+                       jniveles.setForeground(Color.ORANGE);
                              
                     }else{
-                             jniveles.setText("Niveles en Orden");
-                             jniveles.setForeground(Color.green);
-                         }
+                        jniveles.setText("Niveles en Orden");
+                        jniveles.setForeground(Color.green);
+                    }
             }
         };
         
@@ -87,6 +117,8 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
         jprogressCarnes.setMaximum(200);
         jprogressFrutosSecos.setMaximum(300);
         jProgressAgua.setMaximum(1500);
+        
+        
         
         
         jProgressVegetales.setValue(ObjenerVegetales());
@@ -141,6 +173,10 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
         jfrutosPorcentaje = new javax.swing.JLabel();
         jaguaPorcentaje = new javax.swing.JLabel();
         jniveles = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -252,6 +288,14 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
 
         jniveles.setText("Indicador");
 
+        jLabel6.setText("max 700kg");
+
+        jLabel7.setText("max 200kg");
+
+        jLabel8.setText("max 300kg");
+
+        jLabel9.setText("max 1500L");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -285,7 +329,14 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
                             .addComponent(jprogressCarnes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jProgressVegetales, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
                             .addComponent(jprogressFrutosSecos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))
-                        .addGap(52, 52, 52)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel8))
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(378, 378, 378)
@@ -293,7 +344,7 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(280, 280, 280)
                         .addComponent(jniveles, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,28 +355,37 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jProgressVegetales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabelVegetales)
-                                .addComponent(jvegetalesPorcentaje)))
-                        .addGap(67, 67, 67)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabelCarnes)
-                                .addComponent(jcarnesPorcentaje))
-                            .addComponent(jprogressCarnes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(72, 72, 72)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jprogressFrutosSecos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabelFrutos)
-                                .addComponent(jfrutosPorcentaje)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jProgressVegetales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(jLabelVegetales)
+                                                .addComponent(jvegetalesPorcentaje))
+                                            .addComponent(jLabel6))
+                                        .addGap(67, 67, 67)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(jLabelCarnes)
+                                                .addComponent(jcarnesPorcentaje))
+                                            .addComponent(jprogressCarnes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel7))
+                                .addGap(72, 72, 72)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jprogressFrutosSecos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabelFrutos)
+                                        .addComponent(jfrutosPorcentaje))))
+                            .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelAgua, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jProgressAgua, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jaguaPorcentaje))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabelAgua)
+                                .addComponent(jaguaPorcentaje))
+                            .addComponent(jProgressAgua, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(22, 22, 22))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -385,6 +445,10 @@ public class jpanelAgregarComida extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelAgua;
     private javax.swing.JLabel jLabelCarnes;
     private javax.swing.JLabel jLabelFrutos;

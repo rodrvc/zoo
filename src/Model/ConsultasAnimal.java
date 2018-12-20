@@ -135,7 +135,6 @@ public class ConsultasAnimal extends Conexion{
                 System.err.println(e);             
             }
         } 
-         System.out.println(resultado);
        return resultado;
        
     }
@@ -176,7 +175,7 @@ public class ConsultasAnimal extends Conexion{
                 System.err.println(e);             
             }
         } 
-         System.out.println(resultado);
+   
        return resultado;
        
     }
@@ -217,7 +216,7 @@ public class ConsultasAnimal extends Conexion{
                 System.err.println(e);             
             }
         } 
-         System.out.println(resultado);
+
        return resultado;
        
     }
@@ -258,7 +257,7 @@ public class ConsultasAnimal extends Conexion{
                 System.err.println(e);             
             }
         } 
-         System.out.println(resultado);
+      
        return resultado;
        
     }

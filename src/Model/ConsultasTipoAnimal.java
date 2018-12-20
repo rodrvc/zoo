@@ -26,7 +26,7 @@ public class ConsultasTipoAnimal extends Conexion{
         ResultSet rs = null ;
         Connection con = getConexion();
       
-        String sql = "SELECT * FROM tipoAnimal" ;
+        String sql = "SELECT * FROM tipoAnimal where tipo is not null" ;
     
         
         try {

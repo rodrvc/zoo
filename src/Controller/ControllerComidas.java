@@ -25,7 +25,7 @@ public class ControllerComidas {
     static int vegetales =  50;
     private static int Carnes = 30;
     private static int FrutosSecos =  90;
-    private static int Agua = 20 ;
+    private static int Agua = 1000 ;
     
     public static int cantHervivoros;
     public static int cantCarnivoros;
@@ -49,15 +49,23 @@ public class ControllerComidas {
            
             @Override
             public void actionPerformed(ActionEvent e ) {
-                vegetales = vegetales - cantAnimales; 
-                Carnes = Carnes - cantCarnivoros;
-                FrutosSecos = FrutosSecos -cantOmnivoros;
-                Agua = Agua - cantAnimales;
+                if (vegetales > 0) {
+                    vegetales = vegetales - cantAnimales; 
+                }
+                if (Carnes > 0) {
+                    Carnes = Carnes - cantCarnivoros;
+                }
+                if (FrutosSecos > 0) {
+                    FrutosSecos = FrutosSecos -cantOmnivoros;
+                }
+                if (Agua > 0) {
+                    Agua = Agua - cantAnimales;
+                }
             }
         };
        
       
-        t = new Timer(5000, a);
+        t = new Timer(3000, a);
         t.start();
     }
     
@@ -129,28 +137,28 @@ public class ControllerComidas {
     public static int CargarAlimentos(String ElegirAlimentoACargar ,  int cantidad){
         switch (ElegirAlimentoACargar) {
             case "Vegetales":
-                if ((vegetales+cantidad)>100) {
+                if ((vegetales+cantidad)>700) {
                     return 0;
                 }
                 vegetales = vegetales + cantidad;
                 return vegetales;
                 
             case "Carnes":
-                if ((Carnes+cantidad)>100) {
+                if ((Carnes+cantidad)>200) {
                     return 0;
                 }
                 Carnes = Carnes + cantidad;
                 return Carnes;
                 
             case "Frutos secos":
-                if ((FrutosSecos+cantidad)>100) {
+                if ((FrutosSecos+cantidad)>300) {
                     return 0;
                 }
                 FrutosSecos  = FrutosSecos + cantidad;
                 return FrutosSecos;
                 
             case "Agua":
-                if ((Agua+cantidad)>100) {
+                if ((Agua+cantidad)>1500) {
                     return 0;
                 }
                 Agua = Agua + cantidad;
